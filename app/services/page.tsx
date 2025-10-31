@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { IService } from '@/models/Service'
+import { IService } from '../../models/Service'
 
 export default function ServicesPage() {
   const [services, setServices] = useState<IService[]>([])
