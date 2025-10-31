@@ -5,11 +5,32 @@ import ProductGallery from '../components/ProductGallery'
 import Testimonials from '../components/Testimonials'
 import BeforeAfter from '../components/BeforeAfter'
 import Link from 'next/link'
-import services from '../data/services.json'
 import products from '../data/products.json'
 import hair from '../data/hair.json'
+import { IService } from '../models/Service'
 
 export default function HomePage() {
+  const [services, setServices] = useState<IService[]>([])
+  const [servicesLoading, setServicesLoading] = useState(true)
+
+  useEffect(() => {
+    fetchServices()
+  }, [])
+
+  const fetchServices = async () => {
+    try {
+      const response = await fetch('/api/services')
+      const data = await response.json()
+      if (data.success) {
+        setServices(data.services)
+      }
+    } catch (error) {
+      console.error('Error fetching services:', error)
+    } finally {
+      setServicesLoading(false)
+    }
+  }
+
   return (
     <div className="space-y-0">
       <Hero />
@@ -22,21 +43,32 @@ export default function HomePage() {
             <p className="text-gray-600 text-lg">Professional beauty treatments tailored just for you</p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.slice(0,6).map((service, i) => (
-              <div key={i} className="card group">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">💅</div>
-                <h3 className="font-bold text-xl mb-2 group-hover:text-brand transition-colors">{service.name}</h3>
-                <p className="text-gray-600 mb-3">{service.description}</p>
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                  <span>⏱️ {service.duration}</span>
-                  <span className="badge">{service.category || 'Beauty'}</span>
+            {servicesLoading ? (
+              Array.from({length: 6}).map((_, i) => (
+                <div key={i} className="card animate-pulse">
+                  <div className="h-12 bg-gray-200 rounded mb-4"></div>
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-3"></div>
+                  <div className="h-4 bg-gray-200 rounded"></div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-brand">{service.price}</span>
-                  <button className="btn-primary text-sm">Book Now</button>
+              ))
+            ) : (
+              services.slice(0,6).map((service) => (
+                <div key={service._id} className="card group">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">💅</div>
+                  <h3 className="font-bold text-xl mb-2 group-hover:text-brand transition-colors">{service.name}</h3>
+                  <p className="text-gray-600 mb-3">{service.description}</p>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <span>⏱️ {service.duration}</span>
+                    <span className="badge">{service.category}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-brand">₦{service.price.toLocaleString()}</span>
+                    <a href={`https://wa.me/2349016469984?text=Hi! I'd like to book ${service.name}`} className="btn-primary text-sm">Book Now</a>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           <div className="text-center mt-12">
             <Link href="/services" className="btn-secondary">
