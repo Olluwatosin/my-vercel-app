@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { IService } from '../models/Service'
+import ServiceSeeder from './ServiceSeeder'
 
 export default function ServiceManager() {
   const [services, setServices] = useState<IService[]>([])
@@ -179,12 +180,14 @@ export default function ServiceManager() {
         </div>
       )}
 
+      {services.length === 0 && <ServiceSeeder onServicesAdded={fetchServices} />}
+      
       <div className="grid gap-4">
         {services.length === 0 ? (
           <div className="text-center py-12 bg-gray-50 rounded-lg">
             <div className="text-4xl mb-4">💇♀️</div>
             <h3 className="text-lg font-semibold text-gray-700 mb-2">No services yet</h3>
-            <p className="text-gray-500 mb-4">Add your first service to get started</p>
+            <p className="text-gray-500 mb-4">Add your first service manually or use the quick setup above</p>
             <button
               onClick={() => setShowForm(true)}
               className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700"
