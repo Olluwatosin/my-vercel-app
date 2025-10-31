@@ -92,7 +92,7 @@ export default function ProductsPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((product, index) => (
             <div
-              key={product._id || index}
+              key={index}
               className="card-product group"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}

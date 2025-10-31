@@ -105,7 +105,7 @@ export async function POST() {
   try {
     await connectDB()
     
-    const existingCount = await Service.countDocuments()
+    const existingCount = await (Service as any).countDocuments()
     if (existingCount > 0) {
       return NextResponse.json({ 
         success: false, 
@@ -113,7 +113,7 @@ export async function POST() {
       })
     }
     
-    await Service.insertMany(defaultServices)
+    await (Service as any).insertMany(defaultServices)
     
     return NextResponse.json({ 
       success: true, 

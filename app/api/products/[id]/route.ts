@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import dbConnect from '../../../../lib/mongodb'
+import { connectDB } from '../../../../lib/mongodb'
 import Product from '../../../../models/Product'
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    await dbConnect()
+    await connectDB()
     const body = await request.json()
     const product = await Product.findByIdAndUpdate(params.id, body, { new: true })
     if (!product) {
@@ -18,7 +18,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    await dbConnect()
+    await connectDB()
     const product = await Product.findByIdAndDelete(params.id)
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
