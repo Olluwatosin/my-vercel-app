@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Sulfate-Free Shampoo 400ml",
+    "price": "₦6,500",
+    "inStock": true,
+    "note": "Gentle cleanse for natural & relaxed hair. Perfect for daily use.",
+    "category": "Shampoo"
+  },
+  {
+    "name": "Moisture Repair Conditioner 400ml",
+    "price": "₦7,200",
+    "inStock": true,
+    "note": "Restores softness and shine. Deep conditioning formula.",
+    "category": "Conditioner"
+  },
+  {
+    "name": "Leave-In Detangler 250ml",
+    "price": "₦5,800",
+    "inStock": false,
+    "note": "Slip for easy combing and protective styling. Reduces breakage.",
+    "category": "Treatment"
+  },
+  {
+    "name": "Heat Protectant Spray 150ml",
+    "price": "₦6,800",
+    "inStock": true,
+    "note": "Guards against heat damage up to 230°C. Essential for styling.",
+    "category": "Treatment"
+  },
+  {
+    "name": "Edge Control (24hr Hold)",
+    "price": "₦4,500",
+    "inStock": true,
+    "note": "No flakes, sleek finish. Long-lasting hold for perfect edges.",
+    "category": "Styling"
+  },
+  {
+    "name": "Anti-Frizz Serum 50ml",
+    "price": "₦8,200",
+    "inStock": true,
+    "note": "Seals cuticles and boosts shine. Lightweight formula.",
+    "category": "Treatment"
+  },
+  {
+    "name": "Curl Defining Cream 300ml",
+    "price": "₦9,500",
+    "inStock": true,
+    "note": "Enhances natural curl pattern. Provides moisture and definition.",
+    "category": "Styling"
+  },
+  {
+    "name": "Protein Treatment Mask 200ml",
+    "price": "₦12,000",
+    "inStock": true,
+    "note": "Strengthens damaged hair. Weekly intensive treatment.",
+    "category": "Treatment"
+  },
+  {
+    "name": "Scalp Massage Oil 100ml",
+    "price": "₦5,500",
+    "inStock": true,
+    "note": "Promotes healthy hair growth. Nourishes scalp with natural oils.",
+    "category": "Treatment"
+  },
+  {
+    "name": "Volume Boosting Mousse 200ml",
+    "price": "₦7,800",
+    "inStock": false,
+    "note": "Adds body and lift to fine hair. Lightweight formula.",
+    "category": "Styling"
+  }
+]

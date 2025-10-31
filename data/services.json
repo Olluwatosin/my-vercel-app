@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Hair Installation",
+    "duration": "1.5–2 hrs",
+    "price": "₦15,000+",
+    "description": "Professional installation of wigs, closures, or frontals for a flawless and natural finish.",
+    "category": "Hair Services"
+  },
+  {
+    "name": "Ponytail & Sew-ins",
+    "duration": "1–2 hrs",
+    "price": "₦12,000+",
+    "description": "Elegant ponytails or long-lasting sew-in styles that enhance your beauty effortlessly.",
+    "category": "Hair Services"
+  },
+  {
+    "name": "Wig Revamping",
+    "duration": "2–3 hrs",
+    "price": "₦10,000+",
+    "description": "Deep wash, conditioning, and styling to restore old wigs to life and shine.",
+    "category": "Wig Services"
+  },
+  {
+    "name": "Wig Styling",
+    "duration": "1–1.5 hrs",
+    "price": "₦8,000+",
+    "description": "Perfect styling for straight, curly, or wavy wigs — ready to wear for any occasion.",
+    "category": "Wig Services"
+  },
+  {
+    "name": "Wig Making",
+    "duration": "3–4 hrs",
+    "price": "₦20,000+",
+    "description": "Custom-made wigs from your bundles, tailored to fit and style preference.",
+    "category": "Wig Services"
+  },
+  {
+    "name": "Wig Coloring",
+    "duration": "2–3 hrs",
+    "price": "₦18,000+",
+    "description": "Professional coloring and highlights to bring vibrance and uniqueness to your wig.",
+    "category": "Wig Services"
+  },
+  {
+    "name": "Braiding & Cornrows",
+    "duration": "3–6 hrs",
+    "price": "₦25,000+",
+    "description": "Protective styles and neat patterns — knotless, box braids, or cornrows.",
+    "category": "Hair Services"
+  },
+  {
+    "name": "Natural Hair Treatment & Steaming",
+    "duration": "1–1.5 hrs",
+    "price": "₦10,000+",
+    "description": "Moisture and protein treatments that rejuvenate and strengthen natural hair.",
+    "category": "Hair Treatment"
+  },
+  {
+    "name": "Nails Artistry",
+    "duration": "1–2 hrs",
+    "price": "₦7,000+",
+    "description": "Acrylic, gel polish, or classic manicure with creative nail art designs.",
+    "category": "Nail Services"
+  },
+  {
+    "name": "Pedicure & Manicure",
+    "duration": "1–1.5 hrs",
+    "price": "₦6,500+",
+    "description": "Relaxing nail care that leaves your hands and feet soft, fresh, and elegant.",
+    "category": "Nail Services"
+  },
+  {
+    "name": "Facial Treatment",
+    "duration": "1 hr",
+    "price": "₦12,000+",
+    "description": "Deep cleansing facial with moisturizing and anti-aging benefits.",
+    "category": "Beauty Treatment"
+  },
+  {
+    "name": "Physical & Online Training",
+    "duration": "Per session",
+    "price": "₦25,000+",
+    "description": "Comprehensive beauty and hair training — both physical classes and online sessions.",
+    "category": "Training"
+  }
+]
