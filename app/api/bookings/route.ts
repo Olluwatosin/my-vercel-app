@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import dbConnect from '../../../lib/mongodb'
+import { connectDB } from '../../../lib/mongodb'
 import Booking from '../../../models/Booking'
 
 export async function GET() {
   try {
-    await dbConnect()
+    await connectDB()
     const bookings = await Booking.find({}).sort({ createdAt: -1 })
     return NextResponse.json(bookings)
   } catch (error) {
@@ -14,7 +14,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    await dbConnect()
+    await connectDB()
     const body = await request.json()
     const booking = await Booking.create(body)
     return NextResponse.json(booking, { status: 201 })

@@ -1,6 +1,6 @@
 'use client'
-import { useState } from 'react'
-import services from '../data/services.json'
+import { useState, useEffect } from 'react'
+import { IService } from '../models/Service'
 
 interface BookingData {
   name: string
@@ -19,10 +19,30 @@ const timeSlots = [
 
 export default function BookingSystem() {
   const [step, setStep] = useState(1)
+  const [services, setServices] = useState<IService[]>([])
   const [booking, setBooking] = useState<BookingData>({
     name: '', phone: '', email: '', service: '', date: '', time: '', notes: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [servicesLoading, setServicesLoading] = useState(true)
+
+  useEffect(() => {
+    fetchServices()
+  }, [])
+
+  const fetchServices = async () => {
+    try {
+      const response = await fetch('/api/services')
+      const data = await response.json()
+      if (data.success) {
+        setServices(data.services)
+      }
+    } catch (error) {
+      console.error('Error fetching services:', error)
+    } finally {
+      setServicesLoading(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -117,11 +137,12 @@ export default function BookingSystem() {
               value={booking.service}
               onChange={(e) => setBooking({...booking, service: e.target.value})}
               required
+              disabled={servicesLoading}
             >
-              <option value="">Choose a service</option>
-              {services.map((service, i) => (
-                <option key={i} value={service.name}>
-                  {service.name} - {service.price}
+              <option value="">{servicesLoading ? 'Loading services...' : 'Choose a service'}</option>
+              {services.map((service) => (
+                <option key={service._id} value={service.name}>
+                  {service.name} - ₦{service.price.toLocaleString()}
                 </option>
               ))}
             </select>
