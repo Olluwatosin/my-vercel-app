@@ -1,4 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose, { Document, Model } from 'mongoose'
+
+interface IBooking extends Document {
+  name: string
+  phone: string
+  email: string
+  service: string
+  date: Date
+  time: string
+  notes?: string
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+}
 
 const BookingSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -13,4 +24,5 @@ const BookingSchema = new mongoose.Schema({
   timestamps: true
 })
 
-export default mongoose.models.Booking || mongoose.model('Booking', BookingSchema)
+const Booking: Model<IBooking> = mongoose.models.Booking || mongoose.model<IBooking>('Booking', BookingSchema)
+export default Booking

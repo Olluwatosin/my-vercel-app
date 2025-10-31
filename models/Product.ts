@@ -1,4 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose, { Document, Model } from 'mongoose'
+
+interface IProduct extends Document {
+  name: string
+  price: string
+  note: string
+  category: string
+  inStock: boolean
+  image?: string
+  type: 'product' | 'hair'
+}
 
 const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -12,4 +22,5 @@ const ProductSchema = new mongoose.Schema({
   timestamps: true
 })
 
-export default mongoose.models.Product || mongoose.model('Product', ProductSchema)
+const Product: Model<IProduct> = mongoose.models.Product || mongoose.model<IProduct>('Product', ProductSchema)
+export default Product
