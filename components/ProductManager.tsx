@@ -116,7 +116,7 @@ export default function ProductManager() {
 
       {/* Products Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {products.map(product => (
+        {products && products.length > 0 ? products.map(product => (
           <div key={product._id} className="card">
             <div className="flex justify-between items-start mb-3">
               <h3 className="font-bold">{product.name}</h3>
@@ -155,7 +155,19 @@ export default function ProductManager() {
               </button>
             </div>
           </div>
-        ))}
+        )) : (
+          <div className="col-span-full text-center py-12 bg-gray-50 rounded-lg">
+            <div className="text-4xl mb-4">📦</div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">No products yet</h3>
+            <p className="text-gray-500 mb-4">Add your first product to get started</p>
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700"
+            >
+              Add First Product
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
