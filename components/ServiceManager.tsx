@@ -89,7 +89,14 @@ export default function ServiceManager() {
     setShowForm(false)
   }
 
-  if (isLoading) return <div className="text-center py-8">Loading services...</div>
+  if (isLoading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600 mx-auto mb-4"></div>
+        <p>Loading services...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
@@ -173,35 +180,55 @@ export default function ServiceManager() {
       )}
 
       <div className="grid gap-4">
-        {services.map((service) => (
-          <div key={service._id} className="bg-white p-4 rounded-lg shadow border">
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">{service.name}</h3>
-                <p className="text-gray-600 text-sm mb-2">{service.description}</p>
-                <div className="flex space-x-4 text-sm text-gray-500">
-                  <span className="bg-pink-100 text-pink-800 px-2 py-1 rounded">{service.category}</span>
-                  <span className="font-semibold text-green-600">₦{service.price.toLocaleString()}</span>
-                  <span>{service.duration}</span>
+        {services.length === 0 ? (
+          <div className="text-center py-12 bg-gray-50 rounded-lg">
+            <div className="text-4xl mb-4">💇♀️</div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">No services yet</h3>
+            <p className="text-gray-500 mb-4">Add your first service to get started</p>
+            <button
+              onClick={() => setShowForm(true)}
+              className="bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700"
+            >
+              Add First Service
+            </button>
+          </div>
+        ) : (
+          services.map((service) => (
+            <div key={service._id} className="bg-white p-4 rounded-lg shadow border hover:shadow-md transition-shadow">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="font-semibold text-lg text-gray-800">{service.name}</h3>
+                    <span className="bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs font-medium">
+                      {service.category}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 text-sm mb-3 leading-relaxed">{service.description}</p>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="font-bold text-green-600 text-lg">₦{service.price.toLocaleString()}</span>
+                    <span className="text-gray-500 flex items-center gap-1">
+                      <span>⏱️</span> {service.duration}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col space-y-2 ml-4">
+                  <button
+                    onClick={() => handleEdit(service)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors"
+                  >
+                    ✏️ Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(service._id!)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition-colors"
+                  >
+                    🗑️ Delete
+                  </button>
                 </div>
               </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => handleEdit(service)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(service._id!)}
-                  className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600"
-                >
-                  Delete
-                </button>
-              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   )
