@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import ServiceManager from './ServiceManager'
 
 interface Product {
   name: string
@@ -21,7 +22,7 @@ interface HairType {
 }
 
 export default function AdminPanel() {
-  const [activeTab, setActiveTab] = useState<'products' | 'hair'>('products')
+  const [activeTab, setActiveTab] = useState<'products' | 'hair' | 'services'>('products')
   const [isUploading, setIsUploading] = useState(false)
   
   const [productForm, setProductForm] = useState<Product>({
@@ -99,6 +100,16 @@ export default function AdminPanel() {
             onClick={() => setActiveTab('hair')}
           >
             Add Hair Types
+          </button>
+          <button
+            className={`flex-1 py-4 px-6 font-semibold transition-colors ${
+              activeTab === 'services'
+                ? 'bg-brand text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+            onClick={() => setActiveTab('services')}
+          >
+            Manage Services
           </button>
         </div>
 
@@ -179,6 +190,11 @@ export default function AdminPanel() {
                 Add Product
               </button>
             </form>
+          )}
+
+          {/* Services Tab */}
+          {activeTab === 'services' && (
+            <ServiceManager />
           )}
 
           {/* Hair Tab */}
