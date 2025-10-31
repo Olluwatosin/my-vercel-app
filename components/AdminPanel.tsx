@@ -6,6 +6,8 @@ interface Product {
   price: string
   note: string
   inStock: boolean
+  category: string
+  type: string
   image?: string
 }
 
@@ -13,6 +15,8 @@ interface HairType {
   name: string
   price: string
   note: string
+  category: string
+  type: string
   image?: string
 }
 
@@ -21,11 +25,11 @@ export default function AdminPanel() {
   const [isUploading, setIsUploading] = useState(false)
   
   const [productForm, setProductForm] = useState<Product>({
-    name: '', price: '', note: '', inStock: true
+    name: '', price: '', note: '', inStock: true, category: '', type: 'product'
   })
   
   const [hairForm, setHairForm] = useState<HairType>({
-    name: '', price: '', note: ''
+    name: '', price: '', note: '', category: 'Human Hair', type: 'hair'
   })
 
   const handleImageUpload = async (file: File, type: 'product' | 'hair') => {
@@ -52,7 +56,7 @@ export default function AdminPanel() {
     console.log('New Product:', productForm)
     alert('Product added successfully!')
     
-    setProductForm({ name: '', price: '', note: '', inStock: true })
+    setProductForm({ name: '', price: '', note: '', inStock: true, category: '', type: 'product' })
   }
 
   const handleHairSubmit = async (e: React.FormEvent) => {
@@ -62,7 +66,7 @@ export default function AdminPanel() {
     console.log('New Hair Type:', hairForm)
     alert('Hair type added successfully!')
     
-    setHairForm({ name: '', price: '', note: '' })
+    setHairForm({ name: '', price: '', note: '', category: 'Human Hair', type: 'hair' })
   }
 
   return (

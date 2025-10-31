@@ -175,7 +175,8 @@ function ProductForm({
     price: product?.price || '',
     note: product?.note || '',
     category: product?.category || 'Treatment',
-    inStock: product?.inStock ?? true
+    inStock: product?.inStock ?? true,
+    type: product?.type || 'product'
   })
 
   const handleSubmit = (e: React.FormEvent) => {
