@@ -74,12 +74,24 @@ export default function ServicesPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredServices.map((service) => (
             <div key={service._id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              {service.image && (
-                <img 
-                  src={service.image} 
-                  alt={service.name}
-                  className="w-full h-48 object-cover"
-                />
+              {(service.image || service.video) && (
+                <div className="w-full h-48">
+                  {service.mediaType === 'video' && service.video ? (
+                    <video 
+                      src={service.video} 
+                      className="w-full h-48 object-cover"
+                      controls
+                      muted
+                      poster={service.thumbnail}
+                    />
+                  ) : service.image ? (
+                    <img 
+                      src={service.image} 
+                      alt={service.name}
+                      className="w-full h-48 object-cover"
+                    />
+                  ) : null}
+                </div>
               )}
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">

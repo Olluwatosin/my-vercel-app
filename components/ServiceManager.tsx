@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { IService } from '../models/Service'
 import ServiceSeeder from './ServiceSeeder'
+import MediaUpload from './MediaUpload'
 
 export default function ServiceManager() {
   const [services, setServices] = useState<IService[]>([])
@@ -15,7 +16,10 @@ export default function ServiceManager() {
     price: 0,
     duration: '',
     category: '',
-    image: ''
+    image: '',
+    video: '',
+    mediaType: 'image' as 'image' | 'video',
+    thumbnail: ''
   })
 
   useEffect(() => {
@@ -66,7 +70,10 @@ export default function ServiceManager() {
       price: service.price,
       duration: service.duration,
       category: service.category,
-      image: service.image || ''
+      image: service.image || '',
+      video: service.video || '',
+      mediaType: service.mediaType || 'image',
+      thumbnail: service.thumbnail || ''
     })
     setShowForm(true)
   }
@@ -85,9 +92,17 @@ export default function ServiceManager() {
   }
 
   const resetForm = () => {
-    setFormData({ name: '', description: '', price: 0, duration: '', category: '', image: '' })
+    setFormData({ name: '', description: '', price: 0, duration: '', category: '', image: '', video: '', mediaType: 'image', thumbnail: '' })
     setEditingService(null)
     setShowForm(false)
+  }
+
+  const handleMediaUpload = (url: string, type: 'image' | 'video', thumbnail?: string) => {
+    if (type === 'video') {
+      setFormData({...formData, video: url, image: '', mediaType: 'video', thumbnail: thumbnail || ''})
+    } else {
+      setFormData({...formData, image: url, video: '', mediaType: 'image', thumbnail: ''})
+    }
   }
 
   if (isLoading) {
@@ -161,13 +176,16 @@ export default function ServiceManager() {
               className="border rounded-lg px-3 py-2"
               required
             />
-            <input
-              type="url"
-              placeholder="Image URL (optional)"
-              value={formData.image}
-              onChange={(e) => setFormData({...formData, image: e.target.value})}
-              className="border rounded-lg px-3 py-2 col-span-2"
-            />
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Upload Image or Video
+              </label>
+              <MediaUpload
+                onUpload={handleMediaUpload}
+                currentMedia={formData.mediaType === 'video' ? formData.video : formData.image}
+                mediaType={formData.mediaType}
+              />
+            </div>
             <div className="col-span-2 flex space-x-3">
               <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
                 {editingService ? 'Update' : 'Add'} Service
@@ -207,12 +225,30 @@ export default function ServiceManager() {
                     </span>
                   </div>
                   <p className="text-gray-600 text-sm mb-3 leading-relaxed">{service.description}</p>
-                  <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-4 text-sm mb-3">
                     <span className="font-bold text-green-600 text-lg">₦{service.price.toLocaleString()}</span>
                     <span className="text-gray-500 flex items-center gap-1">
                       <span>⏱️</span> {service.duration}
                     </span>
                   </div>
+                  {(service.image || service.video) && (
+                    <div className="mb-3">
+                      {service.mediaType === 'video' && service.video ? (
+                        <video 
+                          src={service.video} 
+                          className="w-full h-32 object-cover rounded-lg"
+                          controls
+                          muted
+                        />
+                      ) : service.image ? (
+                        <img 
+                          src={service.image} 
+                          alt={service.name}
+                          className="w-full h-32 object-cover rounded-lg" 
+                        />
+                      ) : null}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col space-y-2 ml-4">
                   <button

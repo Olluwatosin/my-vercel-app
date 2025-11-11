@@ -8,6 +8,9 @@ export interface IService {
   duration: string
   category: string
   image?: string
+  video?: string
+  mediaType?: 'image' | 'video'
+  thumbnail?: string
   isActive: boolean
   createdAt?: Date
   updatedAt?: Date
@@ -20,6 +23,9 @@ const ServiceSchema = new mongoose.Schema({
   duration: { type: String, required: true },
   category: { type: String, required: true },
   image: { type: String },
+  video: { type: String },
+  mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
+  thumbnail: { type: String },
   isActive: { type: Boolean, default: true }
 }, {
   timestamps: true

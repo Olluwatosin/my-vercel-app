@@ -7,6 +7,9 @@ interface IProduct extends Document {
   category: string
   inStock: boolean
   image?: string
+  video?: string
+  mediaType: 'image' | 'video'
+  thumbnail?: string
   type: 'product' | 'hair'
 }
 
@@ -17,6 +20,9 @@ const ProductSchema = new mongoose.Schema({
   category: { type: String, required: true },
   inStock: { type: Boolean, default: true },
   image: { type: String },
+  video: { type: String },
+  mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
+  thumbnail: { type: String },
   type: { type: String, enum: ['product', 'hair'], default: 'product' }
 }, {
   timestamps: true
